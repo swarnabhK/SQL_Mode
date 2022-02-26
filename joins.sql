@@ -50,3 +50,18 @@ SELECT c.name,c.status,COUNT(DISTINCT i.investor_name) from tutorial.crunchbase_
 tutorial.crunchbase_investments i ON c.permalink = i.company_permalink WHERE c.state_code='NY' GROUP BY c.name,c.status ORDER BY 3 DESC;
 
 
+-- UNIONS
+
+-- Write a query that appends the two crunchbase_investments datasets above (including duplicate values). Filter the first dataset to only companies with names that start with the letter "T", and filter the second to companies with names starting with "M" (both not case-sensitive). Only include the company_permalink, company_name, and investor_name columns.
+
+-- Query
+
+SELECT company_name,company_permalink,investor_name
+  FROM tutorial.crunchbase_investments_part1
+  WHERE company_name like 'T%'
+
+ UNION ALL
+
+ SELECT company_name,company_permalink,investor_name
+  FROM tutorial.crunchbase_investments_part2
+  WHERE company_name like 'M%'
